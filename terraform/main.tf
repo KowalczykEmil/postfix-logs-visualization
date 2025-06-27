@@ -2,6 +2,16 @@ provider "aws" {
   region = "eu-west-1"
 }
 
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+  }
+}
+
 resource "aws_key_pair" "default" {
   key_name   = "postfix-demo-key"
   public_key = file("C:/Users/Emil/.ssh/postfix-demo-key.pub")
@@ -75,9 +85,8 @@ resource "aws_security_group" "opensearch_sg" {
   }
 }
 
-# Postfix Instance
 resource "aws_instance" "mail_server" {
-  ami           = "ami-0a91cd140a1fc148a" 
+  ami           = data.aws_ami.amazon_linux.id
   instance_type = "t3.micro"
   key_name      = aws_key_pair.default.key_name
   security_groups = [aws_security_group.mail_sg.name]
@@ -87,10 +96,9 @@ resource "aws_instance" "mail_server" {
   }
 }
 
-# OpenSearch Instance
 resource "aws_instance" "opensearch_server" {
-  ami           = "ami-0a91cd140a1fc148a"
-  instance_type = "t3.small" 
+  ami           = data.aws_ami.amazon_linux.id
+  instance_type = "t3.small"
   key_name      = aws_key_pair.default.key_name
   security_groups = [aws_security_group.opensearch_sg.name]
 
