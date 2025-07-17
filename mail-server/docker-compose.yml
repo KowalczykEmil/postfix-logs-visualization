@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  postfix:
+    image: catatnight/postfix
+    container_name: postfix
+    environment:
+      - maildomain=${DOMAIN}
+      - smtp_user=${MAIL_USER}:${MAIL_PASSWORD}
+    ports:
+      - "25:25"
+    restart: always
+    networks:
+      - mailnet
+
+  dovecot:
+    image: instrumentisto/dovecot
+    container_name: dovecot
+    volumes:
+      - ./config/dovecot:/etc/dovecot
+    ports:
+      - "143:143"
+      - "993:993"
+    restart: always
+    networks:
+      - mailnet
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.17.0
+    user: root
+    volumes:
+      - ./config/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/log:/host/var/log:ro
+    networks:
+      - mailnet
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.17.0
+    volumes:
+      - ./config/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - "5044:5044"
+    networks:
+      - mailnet
+
+networks:
+  mailnet:
+    driver: bridge
