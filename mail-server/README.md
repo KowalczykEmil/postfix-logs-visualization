@@ -34,7 +34,7 @@ mail-server/
 
 2. Sklonuj repozytorium i przejdź do folderu:
 
-   git clone https://github.com/<twoj_user>/postfix-logs-visualization.git
+   git clone https://github.com/KowalczykEmil/postfix-logs-visualization.git
    cd postfix-logs-visualization/mail-server
 
 3. Skonfiguruj zmienne środowiskowe:
