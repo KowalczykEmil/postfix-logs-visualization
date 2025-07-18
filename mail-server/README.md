@@ -9,16 +9,17 @@ Ten folder zawiera kompletną konfigurację serwera pocztowego z usługami:
 
 ## Struktura folderu
 
+```text
 mail-server/
 ├── config/
-│   ├── filebeat.yml        # Konfiguracja Filebeat
-│   ├── logstash.conf       # Konfiguracja Logstash (output -> OpenSearch)
-│   └── dovecot.conf        # Ewentualne override'y do Dovecota (opcjonalne)
-├── docker-compose.yml      # Definicja usług (Postfix, Dovecot, Logstash)
-├── env.template            # Wzór pliku .env z danymi dostępowymi
-├── setup_mail_server.sh    # Skrypt uruchamiający stack + Filebeat
-├── .gitignore              # Ignoruje certyfikaty i pliki środowiskowe
-
+│   ├── filebeat.yml           # Konfiguracja Filebeat
+│   ├── logstash.conf          # Konfiguracja Logstasha (output → OpenSearch)
+│   └── dovecot.conf           # Opcjonalne nadpisanie konfiguracji Dovecot
+├── docker-compose.yml         # Definicja usług (Postfix, Dovecot, Logstash)
+├── env.template               # Szablon pliku .env z danymi dostępowymi
+├── setup_mail_server.sh       # Skrypt uruchamiający stack + Filebeat
+├── .gitignore                 # Ignorowane pliki (certyfikaty, środowiskowe)
+```
 ## Wymagania
 
 - EC2 z Amazon Linux 2 (lub inny z rootem)
