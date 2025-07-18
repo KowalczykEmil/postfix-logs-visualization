@@ -30,6 +30,14 @@ To repozytorium zawiera kompletny Proof of Concept infrastruktury do analizy log
 | `opensearch/`  | Kontenery z OpenSearch i Dashboards + certyfikaty                    |
 | `mail-server/` | Serwer pocztowy + logowanie + forwarding logów do OpenSearch         |
 
-## Autor
 
-Projekt stworzony jako demonstracja stacku logowania z Postfix do OpenSearch.
+---
+
+## 📸 Demo działania (PoC)
+
+Zobacz przykładowy przepływ wiadomości przychodzących i wychodzących, wraz z podglądem logów w OpenSearch:
+
+👉 [DEMO.md – mail flow z logowaniem w OpenSearch](DEMO.md)
+
+## Autor -  Emil Kowalczyk "CloudManiak".
+Projekt został zrealizowany w celu sprawdzenia działania stacku logującego Postfix + Dovecot z forwardingiem logów do OpenSearch, jako alternatywy dla starszych wersji ElasticSearch wdrożonych np. w Wazuh. W odróżnieniu od komercyjnego ElasticSearch, OpenSearch pozostaje w pełni open-source, co pozwala na większą elastyczność i brak ograniczeń licencyjnych.
